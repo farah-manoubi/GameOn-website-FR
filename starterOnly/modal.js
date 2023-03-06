@@ -15,6 +15,8 @@ const modalBtnClose = document.querySelector(".close");
 
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
+
+// close modal event
 modalBtnClose.addEventListener("click", closeModal);
 
 // launch modal form
@@ -22,8 +24,57 @@ function launchModal() {
   modalbg.style.display = "block";
 }
 
+// close modal form
 function closeModal() {
 	modalbg.style.display = "none";
+}
+
+// validité du formulaire
+let form = document.getElementById("reserve");
+form.addEventListener('submit', validate);
+
+function emailValidation(email) {
+  var caractere = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+  return caractere.test(email);
+}
+
+
+function validate(event){
+  let validityForm = true;
+  
+  let firstName = document.getElementById("first").value;
+  let lastName = document.getElementById("last").value;
+  let adrEmail = document.getElementById("email").value;
+  let nbrConcours = document.getElementById("quantity").value;
+  
+  
+ 
+  if(firstName == '' || firstName.length < 2){
+   
+    validityForm = false;
+    
+   
+  }
+
+  if(lastName == '' || lastName.length < 2){
+    validityForm = false;
+    
+  }
+
+  if(adrEmail == ''){
+    validityForm = false;
+  }
+  
+  if(nbrConcours == ''){
+    validityForm = false;
+  }
+
+  
+  
+  if(!validityForm){
+    event.preventDefault();
+    alert('Le formulaire est incorrect');
+  }
 }
 
 
