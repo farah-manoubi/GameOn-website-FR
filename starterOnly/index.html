@@ -112,14 +112,13 @@
               </div>
               <p class="text-label">A quel tournoi souhaitez-vous participer cette année ?</p>
               <div
-                class="formData">
+                class="formData" data-error="Veuillez sélectionner une location" data-error-visible="">
                 <input
                   class="checkbox-input"
                   type="radio"
                   id="location1"
                   name="location"
                   value="New York"
-                  checked
                 />
                 <label class="checkbox-label" for="location1">
                   <span class="checkbox-icon"></span>
@@ -130,7 +129,7 @@
                   type="radio"
                   id="location2"
                   name="location"
-                  value="San Francisco"
+                  value="San Francisco" 
                 />
                 <label class="checkbox-label" for="location2">
                   <span class="checkbox-icon"></span>
@@ -183,23 +182,23 @@
               </div>
 
               <div
-                class="formData" data-error="Veuillez accepter les conditions d'utilisations" data-error-visible="">
+                class="formData" data-error="Veuillez accepter les conditions d'utilisation" data-error-visible="">
                 <input
                   class="checkbox-input"
                   type="checkbox"
                   id="checkbox1"
-                  checked
-                  required
+                  name="checkbox1"
+                  value="conditions"
                 />
                 <label class="checkbox2-label" for="checkbox1">
                   <span class="checkbox-icon"></span>
                   J'ai lu et accepté les conditions d'utilisation.
                 </label>
                 <br>
-                <input class="checkbox-input" type="checkbox" id="checkbox2" />
+                <input class="checkbox-input" type="checkbox" id="checkbox2"/>
                 <label class="checkbox2-label" for="checkbox2">
                   <span class="checkbox-icon"></span>
-                  Je Je souhaite être prévenu des prochains évènements.
+                  Je souhaite être prévenu des prochains évènements.
                 </label>
                 <br>
               </div>

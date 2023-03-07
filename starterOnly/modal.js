@@ -41,15 +41,13 @@ function emailValidation(email) {
 
 function validate(event){
   let validityForm = true;
-  
   let firstName = document.getElementById("first").value;
   let lastName = document.getElementById("last").value;
   let adrEmail = document.getElementById("email").value;
   let nbrConcours = document.getElementById("quantity").value;
-  let acceptCondition = document.getElementById("checkbox1").value;
+  var checkLoca = document.getElementsByName("location");
+  let acceptCondition = document.getElementById("checkbox1").checked;
   
-  
- 
   if(firstName == '' || firstName.length < 2){
     document.getElementsByClassName("formData")[0].getAttribute("data-error");
     document.getElementsByClassName("formData")[0].setAttribute("data-error-visible", "true");
@@ -69,15 +67,36 @@ function validate(event){
   if(nbrConcours == ''){
     validityForm = false;
   }
- 
+
+  for (let i = 0; i < checkLoca.length; i++) {
+    if(checkLoca[i].checked) {
+      document.getElementsByClassName("formData")[5].getAttribute("data-error");
+      document.getElementsByClassName("formData")[5].setAttribute("data-error-visible", "");
+      checkLoca[i].value = i;
+      validityForm = true;
+      break;
+    }
+    else{
+      document.getElementsByClassName("formData")[5].getAttribute("data-error");
+      document.getElementsByClassName("formData")[5].setAttribute("data-error-visible", "true");
+      validityForm = false;
+    }
+  }
+  
+  if(acceptCondition == false){
+    document.getElementsByClassName("formData")[6].getAttribute("data-error");
+    document.getElementsByClassName("formData")[6].setAttribute("data-error-visible", "true");
+    validityForm = false;
+  }
+
   if(!validityForm){
     event.preventDefault();
     alert('Le formulaire est incorrect');
   }
 
   
-  form.submit();
-  console.log("Formulaire envoyé !");
+ /* form.submit();
+  console.log("Formulaire envoyé !");*/
  
 }
 
