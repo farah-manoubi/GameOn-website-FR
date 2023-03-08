@@ -61,7 +61,7 @@
               id="reserve"
               action="index.html"
               method="get"
-              onsubmit="return validate();"
+              onsubmit="return validate(event)"
             >
               <div
                 class="formData" data-error="Veuillez entrer au moins 2 caractères pour le champs prénom" data-error-visible="">
@@ -86,7 +86,7 @@
                 /><br>
               </div>
               <div
-                class="formData">
+                class="formData" data-error="Veuillez entrer une adresse mail valide" data-error-visible="">
                 <label for="email">E-mail</label><br>
                 <input
                   class="text-control"
@@ -106,7 +106,7 @@
                 /><br>
               </div>
               <div
-                class="formData">
+                class="formData" data-error="Veuillez sélectionner un nombre" data-error-visible="">
                 <label for="quantity">À combien de tournois GameOn avez-vous déjà participé ?</label><br>
                 <input type="number" class="text-control" id="quantity" name="quantity" min="0" max="99">
               </div>
@@ -206,7 +206,9 @@
                 class="btn-submit"
                 type="submit"
                 class="button"
+                id="boutonEnvoi"
                 value="C'est parti"
+                
               />
             </form>
           </div>
