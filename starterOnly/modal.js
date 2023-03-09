@@ -30,8 +30,20 @@ function closeModal() {
 }
 
 // Soumission du formulaire
+let valForm = false;
 let form = document.getElementById("reserve");
-form.addEventListener("submit", validate);
+const confirmation = document.querySelector(".confirme");
+const btnFermer = document.querySelector("#boutonFermer");
+
+form.addEventListener("submit", (event) =>{
+  validate(event);
+
+  if(valForm == true){
+    form.remove();
+    confirmation.style.display = "block";
+    btnFermer.style.display = "block";
+  }
+});
 
 // Fonction qui permet de vérifier si le formulaire contient des erreurs
 function validate(event){
@@ -39,12 +51,12 @@ function validate(event){
   let firstName = document.getElementById("first").value;
   let lastName = document.getElementById("last").value;
   let email = document.getElementById("email").value;
+  let birthDate = document.getElementById("birthdate").value;
   let nbrConcours = document.getElementById("quantity").value;
   var checkLoca = document.querySelector('input[name="location"]:checked'); 
   let acceptCondition = document.getElementById("checkbox1").checked;
 
   var caractere = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
-
 
   // Vérifie si le prénom est vide ou s'il est inférieur à 2 caractères
   if(firstName == '' || firstName.length < 2){
@@ -75,8 +87,18 @@ function validate(event){
     document.getElementsByClassName("formData")[2].getAttribute("data-error");
     document.getElementsByClassName("formData")[2].setAttribute("data-error-visible", "");
   }
+
+  // Vérifie si le champs de la date de naissance est vide
+  if(birthDate == ''){
+    document.getElementsByClassName("formData")[3].getAttribute("data-error");
+    document.getElementsByClassName("formData")[3].setAttribute("data-error-visible", "true");
+    validityForm = false;
+  }else{
+    document.getElementsByClassName("formData")[3].getAttribute("data-error");
+    document.getElementsByClassName("formData")[3].setAttribute("data-error-visible", "");
+  }
   
-  // Vérifie si le champs est vide
+  // Vérifie si le champs des tournois est vide
   if(nbrConcours == ''){
     document.getElementsByClassName("formData")[4].getAttribute("data-error");
     document.getElementsByClassName("formData")[4].setAttribute("data-error-visible", "true");
@@ -109,9 +131,11 @@ function validate(event){
   // Le formulaire n'est pas envoyé s'il y a une erreur
   if(validityForm == false){
     event.preventDefault();
+  }else{
+    valForm = true;
   }
-
 }
+
 
 
 

@@ -96,13 +96,15 @@
                 /><br>
               </div>
               <div
-                class="formData">
+                class="formData" data-error="Veuillez indiquer votre date de naissance" data-error-visible="">
                 <label for="birthdate">Date de naissance</label><br>
                 <input
                   class="text-control"
                   type="date"
                   id="birthdate"
                   name="birthdate"
+                  min="1923-01-01" 
+                  max="2013-04-20"
                 /><br>
               </div>
               <div
@@ -209,15 +211,17 @@
                 id="boutonEnvoi"
                 value="C'est parti" 
               />
-              <input
-                class="btn-submit"
-                type="submit"
-                class="button"
-                id="boutonFermer"
-                value="Fermer"
-              />
             </form>
           </div>
+          <p class="confirme">Merci pour votre inscription</p>
+          <input
+          class="btn-submit"
+          type="submit"
+          class="button"
+          id="boutonFermer"
+          value="Fermer"
+          onclick="closeModal()"
+        />
         </div>
       </div>
     </main>
