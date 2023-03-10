@@ -30,15 +30,18 @@ function closeModal() {
 }
 
 // Soumission du formulaire
-let valForm = false;
+let formValid = false;
 let form = document.getElementById("reserve");
 const confirmation = document.querySelector(".confirme");
 const btnFermer = document.querySelector("#boutonFermer");
 
+// Fonction qui soumet le formulaire
 form.addEventListener("submit", (event) =>{
+  event.preventDefault();
   validate(event);
 
-  if(valForm == true){
+  // Si le formulaire est valide on affiche une page de confirmation
+  if(formValid == true){
     form.remove();
     confirmation.style.display = "block";
     btnFermer.style.display = "block";
@@ -47,7 +50,7 @@ form.addEventListener("submit", (event) =>{
 
 // Fonction qui permet de vérifier si le formulaire contient des erreurs
 function validate(event){
-  let validityForm = true;
+  let conditionValid = true;
   let firstName = document.getElementById("first").value;
   let lastName = document.getElementById("last").value;
   let email = document.getElementById("email").value;
@@ -62,7 +65,7 @@ function validate(event){
   if(firstName == '' || firstName.length < 2){
     document.getElementsByClassName("formData")[0].getAttribute("data-error");
     document.getElementsByClassName("formData")[0].setAttribute("data-error-visible", "true");
-    validityForm = false;
+    conditionValid = false;
   }else{
     document.getElementsByClassName("formData")[0].getAttribute("data-error");
     document.getElementsByClassName("formData")[0].setAttribute("data-error-visible", "");
@@ -72,7 +75,7 @@ function validate(event){
   if(lastName == '' || lastName.length < 2){
     document.getElementsByClassName("formData")[1].getAttribute("data-error");
     document.getElementsByClassName("formData")[1].setAttribute("data-error-visible", "true"); 
-    validityForm = false;
+    conditionValid = false;
   }else{
     document.getElementsByClassName("formData")[1].getAttribute("data-error");
     document.getElementsByClassName("formData")[1].setAttribute("data-error-visible", "");
@@ -82,7 +85,7 @@ function validate(event){
   if(caractere.test(email) == '' || !caractere.test(email)){
     document.getElementsByClassName("formData")[2].getAttribute("data-error");
     document.getElementsByClassName("formData")[2].setAttribute("data-error-visible", "true");
-    validityForm = false;
+    conditionValid = false;
   }else{
     document.getElementsByClassName("formData")[2].getAttribute("data-error");
     document.getElementsByClassName("formData")[2].setAttribute("data-error-visible", "");
@@ -92,7 +95,7 @@ function validate(event){
   if(birthDate == ''){
     document.getElementsByClassName("formData")[3].getAttribute("data-error");
     document.getElementsByClassName("formData")[3].setAttribute("data-error-visible", "true");
-    validityForm = false;
+    conditionValid = false;
   }else{
     document.getElementsByClassName("formData")[3].getAttribute("data-error");
     document.getElementsByClassName("formData")[3].setAttribute("data-error-visible", "");
@@ -102,7 +105,7 @@ function validate(event){
   if(nbrConcours == ''){
     document.getElementsByClassName("formData")[4].getAttribute("data-error");
     document.getElementsByClassName("formData")[4].setAttribute("data-error-visible", "true");
-    validityForm = false;
+    conditionValid = false;
   }else{
     document.getElementsByClassName("formData")[4].getAttribute("data-error");
     document.getElementsByClassName("formData")[4].setAttribute("data-error-visible", "");
@@ -112,7 +115,7 @@ function validate(event){
   if(checkLoca == null) {   
     document.getElementsByClassName("formData")[5].getAttribute("data-error");
     document.getElementsByClassName("formData")[5].setAttribute("data-error-visible", "true");
-    validityForm = false;  
+    conditionValid = false;  
   }else{
     document.getElementsByClassName("formData")[5].getAttribute("data-error");
     document.getElementsByClassName("formData")[5].setAttribute("data-error-visible", "");
@@ -122,17 +125,17 @@ function validate(event){
   if(acceptCondition == false){
     document.getElementsByClassName("formData")[6].getAttribute("data-error");
     document.getElementsByClassName("formData")[6].setAttribute("data-error-visible", "true");
-    validityForm = false;
+    conditionValid = false;
   }else{
     document.getElementsByClassName("formData")[6].getAttribute("data-error");
     document.getElementsByClassName("formData")[6].setAttribute("data-error-visible", "");
   }
 
   // Le formulaire n'est pas envoyé s'il y a une erreur
-  if(validityForm == false){
+  if(conditionValid == false){
     event.preventDefault();
   }else{
-    valForm = true;
+    formValid = true;
   }
 }
 
