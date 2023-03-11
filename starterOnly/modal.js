@@ -19,19 +19,22 @@ modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 // close modal event
 modalBtnClose.addEventListener("click", closeModal);
 
+let form = document.getElementById("reserve");
+
 // launch modal form
 function launchModal() {
   modalbg.style.display = "block";  
+  form.style.display = "block";
 }
 
 // close modal form
 function closeModal() {
 	modalbg.style.display = "none";
+  form.submit();
 }
 
 // Soumission du formulaire
 let formValid = false;
-let form = document.getElementById("reserve");
 const confirmation = document.querySelector(".confirme");
 const btnFermer = document.querySelector("#boutonFermer");
 
@@ -42,7 +45,7 @@ form.addEventListener("submit", (event) =>{
 
   // Si le formulaire est valide on affiche une page de confirmation
   if(formValid == true){
-    form.remove();
+    form.style.display ="none";
     confirmation.style.display = "block";
     btnFermer.style.display = "block";
   }
