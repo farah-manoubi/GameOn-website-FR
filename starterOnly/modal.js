@@ -54,64 +54,59 @@ form.addEventListener("submit", (event) =>{
 // Fonction qui permet de vérifier si le formulaire contient des erreurs
 function validate(event){
   let conditionValid = true;
-  let firstName = document.getElementById("first").value;
-  let lastName = document.getElementById("last").value;
-  let email = document.getElementById("email").value;
-  let birthDate = document.getElementById("birthdate").value;
-  let nbrConcours = document.getElementById("quantity").value;
+  let firstName = document.getElementById("first");
+  let lastName = document.getElementById("last");
+  let email = document.getElementById("email");
+  let birthDate = document.getElementById("birthdate");
+  let nbrConcours = document.getElementById("quantity");
   var checkLoca = document.querySelector('input[name="location"]:checked'); 
   let acceptCondition = document.getElementById("checkbox1").checked;
 
-  var caractere = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+  var caractere = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,10}(?:\.[a-z]{10})?)$/i;
+  const today = new Date();
+  const birth = new Date(birthDate.value);
+  minDate = new Date('1923-01-01');
+  
+  
 
   // Vérifie si le prénom est vide ou s'il est inférieur à 2 caractères
-  if(firstName == '' || firstName.length < 2){
-    document.getElementsByClassName("formData")[0].getAttribute("data-error");
-    document.getElementsByClassName("formData")[0].setAttribute("data-error-visible", "true");
+  if(firstName.value == '' || firstName.value.length < 2){
+    firstName.parentElement.setAttribute("data-error-visible", "true");
     conditionValid = false;
   }else{
-    document.getElementsByClassName("formData")[0].getAttribute("data-error");
-    document.getElementsByClassName("formData")[0].setAttribute("data-error-visible", "");
+    firstName.parentElement.setAttribute("data-error-visible", "");
   }
   
   // Vérifie si le nom est vide ou s'il est inférieur à 2 caractères
-  if(lastName == '' || lastName.length < 2){
-    document.getElementsByClassName("formData")[1].getAttribute("data-error");
-    document.getElementsByClassName("formData")[1].setAttribute("data-error-visible", "true"); 
+  if(lastName.value == '' || lastName.value.length < 2){
+    lastName.parentElement.setAttribute("data-error-visible", "true");
     conditionValid = false;
   }else{
-    document.getElementsByClassName("formData")[1].getAttribute("data-error");
-    document.getElementsByClassName("formData")[1].setAttribute("data-error-visible", "");
+    lastName.parentElement.setAttribute("data-error-visible", "");
   }
 
   // Vérifie si l'adresse mail est vide ou si sa structure est respectée
-  if(caractere.test(email) == '' || !caractere.test(email)){
-    document.getElementsByClassName("formData")[2].getAttribute("data-error");
-    document.getElementsByClassName("formData")[2].setAttribute("data-error-visible", "true");
+  if(caractere.test(email.value) == '' || !caractere.test(email.value)){
+    email.parentElement.setAttribute("data-error-visible", "true");
     conditionValid = false;
   }else{
-    document.getElementsByClassName("formData")[2].getAttribute("data-error");
-    document.getElementsByClassName("formData")[2].setAttribute("data-error-visible", "");
+    email.parentElement.setAttribute("data-error-visible", "");
   }
 
   // Vérifie si le champs de la date de naissance est vide
-  if(birthDate == ''){
-    document.getElementsByClassName("formData")[3].getAttribute("data-error");
-    document.getElementsByClassName("formData")[3].setAttribute("data-error-visible", "true");
+  if(birth.getTime() > today.getTime() || birthDate.value == '' || birth.getTime() < minDate){
+    birthDate.parentElement.setAttribute("data-error-visible", "true");
     conditionValid = false;
   }else{
-    document.getElementsByClassName("formData")[3].getAttribute("data-error");
-    document.getElementsByClassName("formData")[3].setAttribute("data-error-visible", "");
+    birthDate.parentElement.setAttribute("data-error-visible", "");
   }
   
   // Vérifie si le champs des tournois est vide
-  if(nbrConcours == ''){
-    document.getElementsByClassName("formData")[4].getAttribute("data-error");
-    document.getElementsByClassName("formData")[4].setAttribute("data-error-visible", "true");
+  if(nbrConcours.value < 0 || nbrConcours.value == ''){
+    nbrConcours.parentElement.setAttribute("data-error-visible", "true");
     conditionValid = false;
   }else{
-    document.getElementsByClassName("formData")[4].getAttribute("data-error");
-    document.getElementsByClassName("formData")[4].setAttribute("data-error-visible", "");
+    nbrConcours.parentElement.setAttribute("data-error-visible", "");
   }
    
   // Vérifie si une location a été sélectionnée
